@@ -1,13 +1,3 @@
-#
-# Reinforcement learning agent for the "driverless car" using Tensorflow
-#
-# Parts inspired by
-# https://github.com/songrotek/DQN-Atari-Tensorflow/blob/master/BrainDQN_Nature.py
-#
-# @scottpenberthy
-# November 1, 2016
-#
-
 import tensorflow as tf
 import numpy as np
 import random
