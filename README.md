@@ -198,24 +198,3 @@ $x， y$ 这两个特征没有进行标准化，因为已经符合要求。$thet
 #### 进一步工作
 
 本次实验仅仅是在二维环境中进行的。但是严格来说并不是复杂环境的最佳简化。三维环境更加贴近现实情况，例如我们可以设计一个飞行的环境模拟。
-
-
-### 相关链接
-
-[1]. https://medium.com/@harvitronix/using-reinforcement-learning-in-python-to-teach-a-virtual-car-to-avoid-obstacles-6e782cc7d4c6#.58wi2s7ct
-
-[2]. https://github.com/songrotek/DQN-Atari-Tensorflow/blob/master/BrainDQN_Nature.py
-
-[3]. https://www.continuum.io/why-anaconda
-
-[4]. https://www.tensorflow.org/versions/r0.11/get_started/os_setup.html#anaconda-installation
-
-[5]. http://www.pygame.org/wiki/GettingStarted
-
-[6]. http://www.pymunk.org/en/latest/
-
-[7]. http://www.numpy.org/
-
-[8]. http://www.scipy.org/
-
-[9]. https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
