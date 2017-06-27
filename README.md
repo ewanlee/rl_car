@@ -4,13 +4,13 @@
 
 最近，自动驾驶汽车十分火热。但是，自动驾驶问题是一个机器学习集大成的问题，十分的复杂。因此，我们希望可以设计出一个简单的学习环境能够对自动驾驶问题进行模拟，并且不需要GPU （主要是太贵）。
 
-我们的学习环境借鉴了Matt Harvey's virtual car[1] 的环境设置。运用了 TensorFlow， Python 2.7 以及 PyGame 5.0. 本项目中运用了深度Q强化学习算法，但是为了符合我们上面提到的要求，我们去掉了该算法中 “深度” 的部分。代码设计的一些思想借鉴了 songotrek's Q学习算法的TensorFlow实现 [2].
+我们的学习环境借鉴了[Matt Harvey's virtual car](https://medium.com/@harvitronix/using-reinforcement-learning-in-python-to-teach-a-virtual-car-to-avoid-obstacles-6e782cc7d4c6#.58wi2s7ct) 的环境设置。运用了 TensorFlow， Python 2.7 以及 PyGame 5.0. 本项目中运用了深度Q强化学习算法，但是为了符合我们上面提到的要求，我们去掉了该算法中 “深度” 的部分。代码设计的一些思想借鉴了 [songotrek's Q学习算法的TensorFlow实现](https://github.com/songrotek/DQN-Atari-Tensorflow/blob/master/BrainDQN_Nature.py).
 
 #### 问题描述
 
 ![fig1](figures/game.jpg)
 
-*图片来源于[1]*
+*图片来源于[Matt Harvey's virtual car](https://medium.com/@harvitronix/using-reinforcement-learning-in-python-to-teach-a-virtual-car-to-avoid-obstacles-6e782cc7d4c6#.58wi2s7ct)*
 
 我们所要解决的问题就是设计一个算法使得模拟小车能够自动行驶。
 
@@ -20,12 +20,12 @@
 
 #### 环境需求
 
-- Anaconda Python Distribution 2.7 [3]
-- TensorFlow for Anaconda [4]
-- PyGame [5]，用于展示图形界面
-- PyMunk [6]，为了模拟游戏中的物理环境
-- Numpy [7]
-- Scipy [8]
+- [Anaconda Python Distribution 2.7](https://www.continuum.io/why-anaconda)
+- [TensorFlow for Anaconda](https://www.tensorflow.org/versions/r0.11/get_started/os_setup.html#anaconda-installation)
+- [PyGame](http://www.pygame.org/wiki/GettingStarted)，用于展示图形界面
+- [PyMunk](http://www.pymunk.org/en/latest/)，为了模拟游戏中的物理环境
+- [Numpy](http://www.numpy.org/)
+- [Scipy](http://www.scipy.org/)
 
 实验运行的环境为 Ubuntu 16.04 LTS 虚拟机， 虚拟机为VMware Workstation 12.5.2 build-4638234。虚拟机运行在Windows 10 Pro上。
 
@@ -39,7 +39,7 @@
 
 #### 优化目标
 
-我们使用的是 Deep Q Learning [9] 论文中定义的 QMax 值。
+我们使用的是 [Deep Q Learning](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf) 论文中定义的 QMax 值。
 
 QMax 值指的是在一定时间范围内，对于所有的训练样本，Q 函数（使用神经网络进行拟合）输出的最大的 Q-value。随着agent（模拟小车）不断进行学习，它将采取更加优秀的策略，因此存活时间会更长，那么 Q-value (在我们的实验中便是score) 会越大。如果我们的优化目标是增大 Q-value 的上界，也便相应的增大了 Q-value 值。
 
@@ -144,9 +144,9 @@ end for
 
 $x， y$ 这两个特征没有进行标准化，因为已经符合要求。$theta$通过除以$2\pi$进行标准化。在没有进行标准化之前，我们在实验中发现，$theta$的值会达到$10^3$这个数量级，使得网络发生了bias shift现象。$s_1, s_2, s_3$通过除以40来进行标准化。
 
-我们同样试着能够将reward也进行标准化，将其范围缩小到[-1, 1]。因为DQN论文中同样使用了这种方法，使得该算法应用在不同的Atari游戏上时不用对算法进行参数的调整。但是，我们在网络训练的前一百万步并没有发现性能有明显的提升。因为reward的值更大的话，学习将会更容易，这样reward信号会更加明显，不会被淹没在网络的高斯噪声中。所以我们希望reward能够大一点，但是多大比较合适又是一个问题。
+我们同样试着能够将reward也进行标准化，将其范围缩小到[-1, 1]。因为[DQN论文](https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf)中同样使用了这种方法，使得该算法应用在不同的Atari游戏上时不用对算法进行参数的调整。但是，我们在网络训练的前一百万步并没有发现性能有明显的提升。因为reward的值更大的话，学习将会更容易，这样reward信号会更加明显，不会被淹没在网络的高斯噪声中。所以我们希望reward能够大一点，但是多大比较合适又是一个问题。
 
-我们所借鉴的算法[1]，将这个reward的最小值设置成了-500（小车撞上了障碍物），但我们实验发现这个值设置的过小（下面将会解释），所以最后的范围调整为[-100, 10] （通过裁剪）。我们把这个过程称之为reward正则化。
+我们所借鉴的[算法](https://medium.com/@harvitronix/using-reinforcement-learning-in-python-to-teach-a-virtual-car-to-avoid-obstacles-6e782cc7d4c6#.58wi2s7ct)，将这个reward的最小值设置成了-500（小车撞上了障碍物），但我们实验发现这个值设置的过小（下面将会解释），所以最后的范围调整为[-100, 10] （通过裁剪）。我们把这个过程称之为reward正则化。
 
 #### Reward 正则化
 
