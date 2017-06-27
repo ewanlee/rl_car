@@ -1,10 +1,3 @@
-#
-# Some plotting routes to show off the learning agent for the "driverless car" using Tensorflow
-#
-# @scottpenberthy
-# November 1, 2016
-#
-
 import tensorflow as tf
 import numpy as np
 from learning import *
