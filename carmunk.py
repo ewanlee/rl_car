@@ -1,13 +1,3 @@
-#
-# Carmunk ported to PyMunk 5.0
-#
-# Original code
-# https://github.com/harvitronix/reinforcement-learning-car/blob/master/flat_game/carmunk.py
-#
-# @scottpenberthy
-# October, 2016
-#
-
 import random
 import math
 import numpy as np
