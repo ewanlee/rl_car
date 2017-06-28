@@ -49,6 +49,14 @@ QMax 值指的是在一定时间范围内，对于所有的训练样本，Q 函�
 
 我们使用的是Tensorflow自带的TensorBoard来监测QMax以及最大score的变化情况（希望整体趋势是逐渐增大的）
 
+下面是运行过程中的截图：
+
+![s](figures/tensdorboard_s.png)
+
+下面是各网络参数的分布变化情况：
+
+![h](figures/tensdorboard_h.png)
+
 
 
 ### 分析
@@ -182,6 +190,11 @@ $x， y$ 这两个特征没有进行标准化，因为已经符合要求。$thet
 可以看出，我们的算法性能完全超越了随机算法。
 
 下面是动画演示：
+首先是随机算法：
+
+![random](figures/random.gif)
+
+Q-learning算法：
 
 ![final](figures/final.gif)
 
